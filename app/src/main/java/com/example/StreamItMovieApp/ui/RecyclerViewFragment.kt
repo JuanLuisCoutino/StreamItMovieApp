@@ -15,6 +15,7 @@ class RecyclerViewFragment : Fragment() {
 
     private var _binding : RecyclerViewBinding? = null
     private val binding get() = _binding!!
+    var trueFlag = true
 
     //Inflamos el binding con el archivo xml
     override fun onCreateView(
