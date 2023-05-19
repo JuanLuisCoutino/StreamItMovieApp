@@ -31,8 +31,8 @@ class RecyclerViewFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val myList = listOf(DataCall(R.mipmap.ic_launcher, "Movie 1", "2002"),
-                            DataCall(R.mipmap.ic_launcher_round, "The Movie db", "2020"))
+        val myList = listOf(DataCall(R.mipmap.ic_launcher, "Movie 1", "(2002)"),
+                            DataCall(R.mipmap.ic_launcher_round, "The Movie db", "(2020)"))
 
         binding.recyclerViewID.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
         binding.recyclerViewID.adapter = AdapterRV(myList)
