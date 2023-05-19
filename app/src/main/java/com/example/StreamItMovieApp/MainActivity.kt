@@ -19,6 +19,8 @@ class MainActivity : AppCompatActivity(){
         // Configuración de la barra de acción con NavController para tener el botón de retroceso y el título actualizados correctamente
         setupActionBarWithNavController(navController)
 
+
+
     }
 
 
