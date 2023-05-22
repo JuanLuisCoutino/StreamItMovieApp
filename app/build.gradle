@@ -43,7 +43,9 @@ android {
 
 dependencies {
 
-    
+    //OkHttp
+    implementation 'com.squareup.okhttp3:logging-interceptor:+'
+    implementation 'com.squareup.okhttp3:okhttp:+'
 
     // RecyclerView
     implementation 'androidx.recyclerview:recyclerview:1.2.1'
@@ -57,6 +59,8 @@ dependencies {
     implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
     // Coroutines adapter
     implementation 'com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:0.9.2'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.0'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.0'
 
     implementation 'androidx.core:core-ktx:1.10.1'
     implementation 'androidx.appcompat:appcompat:1.6.1'
