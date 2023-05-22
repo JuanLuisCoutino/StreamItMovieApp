@@ -4,10 +4,17 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupActionBarWithNavController
+import com.example.StreamItMovieApp.API.RetrofitInstance
+import com.example.StreamItMovieApp.ui.AdapterRV
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class MainActivity : AppCompatActivity(){
 
     private lateinit var navHostFragment: NavHostFragment
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -19,9 +26,8 @@ class MainActivity : AppCompatActivity(){
         // Configuración de la barra de acción con NavController para tener el botón de retroceso y el título actualizados correctamente
         setupActionBarWithNavController(navController)
 
-
-
     }
+
 
 
 

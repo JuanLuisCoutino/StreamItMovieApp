@@ -8,14 +8,18 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.StreamItMovieApp.API.RetrofitInstance
 import com.example.StreamItMovieApp.R
 import com.example.StreamItMovieApp.databinding.RecyclerViewBinding
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class RecyclerViewFragment : Fragment() {
 
     private var _binding : RecyclerViewBinding? = null
     private val binding get() = _binding!!
-    var trueFlag = true
 
     //Inflamos el binding con el archivo xml
     override fun onCreateView(
@@ -31,15 +35,36 @@ class RecyclerViewFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val myList = listOf(DataCall(R.mipmap.ic_launcher, "Movie 1", "(2002)"),
-                            DataCall(R.mipmap.ic_launcher_round, "The Movie db", "(2020)"))
 
-        binding.recyclerViewID.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
-        binding.recyclerViewID.adapter = AdapterRV(myList)
+        CoroutineScope(Dispatchers.IO).launch {
+
+            val callResponse = RetrofitInstance.theMovieDbService.getPlayingNowList("a18af9730f4b36fd3032baedeeb0de39","en-US", 1)
+
+            withContext(Dispatchers.Main){
+                val movieList = callResponse.PlayingNowList1.map { DataCall(it.imageResource, it.movieName, it.movieYear) }
+                val movieAdapter = AdapterRV(movieList)
+                binding.recyclerViewID.adapter = AdapterRV(movieList)
+            }
+        }
         binding.recyclerViewID.addItemDecoration(itemDecoration(25))
         binding.recyclerViewID.setHasFixedSize(true)
 
     }
+
+    private fun callMovies(){
+        //llamada a la red asincronica con Coroutines, añadiendo un Dispatchers.IO para que dedique un hilo especial para las operaciones entrada/salida
+        CoroutineScope(Dispatchers.IO).launch {
+
+            val callResponse = RetrofitInstance.theMovieDbService.getPlayingNowList("eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJhMThhZjk3MzBmNGIzNmZkMzAzMmJhZWRlZWIwZGUzOSIsInN1YiI6IjY0NjA0MjBjYTY3MjU0MDE0MzY2OTE1NiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.hSqbYXebxRCwMkNTi0aCrrEypq1WK8IKrTE_icXr1EY","en-US", 1)
+
+            withContext(Dispatchers.Main){
+                val movieList = callResponse.PlayingNowList1.map { DataCall(it.imageResource, it.movieName, it.movieYear) }
+                val movieAdapter = AdapterRV(movieList)
+                binding.recyclerViewID.adapter = AdapterRV(movieList)
+            }
+        }
+    }
+
 
     //Limpiar el binding cuando es destruido
     override fun onDestroyView() {

@@ -19,11 +19,11 @@ class AdapterRV(private var myList2 : List<DataCall>) : RecyclerView.Adapter<Ada
     override fun getItemCount() = myList2.size
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        var currentItem = myList2[position]
 
-        holder.imageView.setImageResource(currentItem.imageResource)
-        holder.tvMovie.text = currentItem.movieName
-        holder.tvYear.text = currentItem.movieYear
+        val movieList = myList2[position]
+        holder.tvMovie.text = movieList.movieName
+        holder.imageView.setImageResource(movieList.imageResource)
+        holder.tvYear.text = movieList.movieYear
 
         val layoutParams = holder.itemView.layoutParams as RecyclerView.LayoutParams
         layoutParams.setMargins(0, 0, 0, 0)

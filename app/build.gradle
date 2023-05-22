@@ -43,7 +43,9 @@ android {
 
 dependencies {
 
-    // Retrofit
+    
+
+    // RecyclerView
     implementation 'androidx.recyclerview:recyclerview:1.2.1'
     // Navigation Fragments
     implementation "androidx.navigation:navigation-fragment-ktx:+"

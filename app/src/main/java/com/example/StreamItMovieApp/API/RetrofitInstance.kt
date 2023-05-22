@@ -6,7 +6,7 @@ import retrofit2.create
 
 object RetrofitInstance {
 
-    private const val BASE_URL = "https://api.themoviedb.org/3/"
+    private const val BASE_URL = "https://api.themoviedb.org/3/movie/now_playing?"
 
     private val retrofit : Retrofit = Retrofit.Builder()
         .baseUrl(BASE_URL)
